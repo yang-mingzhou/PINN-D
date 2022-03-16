@@ -3,7 +3,6 @@ import time
 from shapely.geometry import Polygon
 import os
 
-# run in cygwin64 with python2
 
 def save_graph_shapefile_directional(G, filepath=None, encoding="utf-8"):
     # default filepath if none was provided

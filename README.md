@@ -11,11 +11,11 @@ Some scripts (for map matching) require cygwin and python 2.7
 ## Pipeline:
 1. Data preprocessing:
    
-   (a) Trajectory generation: extract and sample (by every 3 seconds) the trajectories of vehicles for map matching.   
+   (a) [Trajectory generation](https://github.com/yang-mingzhou/PINN-D/blob/main/code/trajectoryGeneration.py): extract and sample (by every 3 seconds) the trajectories of vehicles for map matching.   
    
-   (b) Download the osm graph data
+   (b) [Download the osm graph data](https://github.com/yang-mingzhou/PINN-D/blob/main/code/downloadGraph.py)
    
-   (a) Map matching
+   (a) [Map matching](https://github.com/yang-mingzhou/PINN-D/blob/main/code/mapmatching.py)
 
    (b) Feature extraction
 
@@ -38,5 +38,5 @@ Change Log
 -----
 
 ### 2022/3/15
-Version 1.0 Define the pipeline in readme.md, scripts for trajectory generation and graph download
+Version 1.0 Define the pipeline in readme.md, scripts for trajectory generation, graph download and mapmatching
 
