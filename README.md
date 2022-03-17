@@ -13,7 +13,7 @@ Some scripts (for map matching) require cygwin and python 2.7
    
    (a) [Trajectory generation](https://github.com/yang-mingzhou/PINN-D/blob/main/code/trajectoryGeneration.py): extract and sample (by every 3 seconds) the trajectories of vehicles for map matching.   
    
-   (b) [Download the osm graph data](https://github.com/yang-mingzhou/PINN-D/blob/main/code/downloadGraph.py)
+   (b) [Download the osm graph data](https://github.com/yang-mingzhou/PINN-D/blob/main/code/downloadGraph.py): download the osm graph within the bounding box to the folder '/data/bbox' 
    
    (a) [Map matching](https://github.com/yang-mingzhou/PINN-D/blob/main/code/mapmatching.py)
 
