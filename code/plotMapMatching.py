@@ -74,13 +74,66 @@ def plot_edge_list_dataframe(network_gdf, edge_tu_list,df,cnt_out,cnt_in):
     gc.collect()
 
 
-filepath = './trajectory_old'
-if not os.path.exists(filepath):
-    os.makedirs(filepath)
+def read_trajectory(f, cnt):
+    '''Read the No. cnt file in the folder f
+
+    Args:
+        f: File path of a folder
+        cnt: Location of the file of interest
+
+    Returns:
+        A dataframe of the No. cnt file in the folder f
+    '''
+    path_list = os.listdir(f)
+    fn = path_list[cnt]
+    filename = f + "/" + fn
+    print(filename)
+    return pd.read_csv(filename, sep=";")
+
+
+def read_matched(f, cnt):
+    '''Read the No. cnt matched result file in the folder f
+
+    Args:
+        f: File path of a folder
+        cnt: Location of the file of interest
+
+    Returns:
+        A dataframe of the No. cnt file in the folder f
+    '''
+    path_list = os.listdir(f)
+    path_list.sort(key=lambda x: int(x[2:-4]))
+    fn = path_list[cnt]
+    filename = f + "/" + fn
+    print(filename)
+    return pd.read_csv(filename, sep=";")
+
+
+def extract_opath(opath):
+    '''Divide the map-matched results connected by commas into a list.
+
+    Args:
+        opath: Map-matched results connected by commas
+
+    Returns:
+        A list of matched edges
+    '''
+    if (opath == ''):
+        return []
+    elif isinstance(opath, float):
+        return int(opath)
+    return [int(s) for s in opath.split(',')]
+
+network_gdf = gpd.read_file(r'../data/bbox/edges.shp')
+nodes_gdf = gpd.read_file(r'../data/bbox/nodes.shp')
+G = ox.utils_graph.graph_from_gdfs(nodes_gdf,network_gdf)
+ox.plot_graph(G)
+
 cnt_file = -1
-f_t = r'./trajectory_old_sampled2s'
-f_m = r'./match_result_old'
-for f, m, n in walk(r'D:/data/Baseline Data (Murphy)'):
+f_t = r'../data/trajectorySampledEvery3s'
+f_m = r'../data/mapMatchingResult'
+
+for f, m, n in walk(r'../datasets/Baseline Data (Murphy)'):
     if not m and n: # obd file
         #print(f,n)
         for i in range(0,len(n),2):
@@ -114,6 +167,6 @@ for f, m, n in walk(r'D:/data/Baseline Data (Murphy)'):
                             if segment[k] != segment[k-1]:
                                 seg_drop_dup.append(segment[k])
                         df_sub = raw_data_gps[beg:end:20]
-                        plot_edge_list_dataframe(seg_drop_dup,df_sub,cnt_file,j)
+                        plot_edge_list_dataframe(network_gdf,seg_drop_dup,df_sub,cnt_file,j)
             break
         break

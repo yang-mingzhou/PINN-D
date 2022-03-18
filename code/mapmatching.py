@@ -28,7 +28,7 @@ for f, m, n in walk(trajPath):
     if n:
         for fn in n:
             cnt += 1
-            if cnt > 80:
+            if cnt > 0:
                 start_time = time.time()
                 # Define input data configuration
                 input_config = GPSConfig()
