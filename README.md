@@ -11,13 +11,13 @@ Some scripts (for map matching) require cygwin and python 2.7
 ## Pipeline:
 1. Data preprocessing:
    
-   (a) [Trajectory generation](https://github.com/yang-mingzhou/PINN-D/blob/main/code/trajectoryGeneration.py): extract and sample (by every 3 seconds) the trajectories of vehicles for map matching (3646 trajectories in total).   
-   
-   (b) [Download the osm graph data](https://github.com/yang-mingzhou/PINN-D/blob/main/code/downloadGraph.py): download the osm graph within the bounding box to the folder '/data/bbox' 
-   
-   (a) [Map matching](https://github.com/yang-mingzhou/PINN-D/blob/main/code/mapmatching.py)
+   (a) [Download the osm graph data](https://github.com/yang-mingzhou/PINN-D/blob/main/code/downloadGraph.py): download the osm graph within the bounding box to the folder '/data/bbox'. We are using a bounding box: (min Longitude, max Longitude , min Latitude , max Latitude: -95.35305 -91.544 43.1759 45.891999999999996)  which contains 722629 edges and 277704 nodes.
+      
+   (b) [Trajectory generation](https://github.com/yang-mingzhou/PINN-D/blob/main/code/trajectoryGeneration.py): extract and sample (by every 3 seconds) the trajectories of vehicles inside the bounding box for map matching (3646 trajectories in total).      
 
-   (b) Feature extraction
+   (c) [Map matching](https://github.com/yang-mingzhou/PINN-D/blob/main/code/mapmatching.py)
+
+   (d) Feature extraction
 
 2. Model definition
 
