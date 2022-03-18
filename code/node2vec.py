@@ -26,7 +26,6 @@ def readGraph():
     graph.update(edges=eNew, nodes=lineGraph.nodes)
     return graph
 
-
 class N2V:
     def __init__(self, ckpt_path, newModel = False):
         self.dualGraph = readGraph()
