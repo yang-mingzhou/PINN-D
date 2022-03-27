@@ -18,7 +18,7 @@ import geopandas as gpd
 import math
 from tqdm import tqdm
 import copy
-from PhysicsModel.Code.diesel_vehicleModel_MERL import *
+from diesel_vehicleModel_MERL import *
 
 
 def timeInterpolation(l: list):
@@ -369,6 +369,23 @@ def simulateFuelConsumption(df, truckId):
     output['fuel_est'] = output['fuel_est'] * 3.7854
 
     return output['fuel_est'].values
+
+
+def velocityProfileInterp(velocityProfile, timestamp, lengthOfInterp = 60):
+    '''
+    Args
+        velocityProfile: a list of the original velocity profile
+        timestamp: a list of the timestamp of the velocityProfile
+        lengthOfInterp: the length of the interpolated list
+    return: a list of the interpolated list with length lengthOfInterp
+    '''
+    newTimestamp = [timestamp[0] for _ in range(lengthOfInterp)]
+    totalTime = timestamp[-1] - timestamp[0]
+    if totalTime > 0:
+        timeInterval = totalTime/lengthOfInterp
+        for i in range(1, lengthOfInterp):
+            newTimestamp[i] = newTimestamp[i-1]+timeInterval
+    return list(np.interp(newTimestamp, timestamp, velocityProfile))
 
 
 def post_process(raw_data_gps, raw_data_obd, beg, end, segment, cnt_out, cnt_in, df_edge, network_gdf, truckId):
